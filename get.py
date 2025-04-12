@@ -14,7 +14,8 @@ class DBLP:
         name_request = '+'.join(name_list)
         search_url = self.base_url + 'search/author/api'
         search_name_data = requests.get(search_url, params={'q':name_request, 'format': 'json'}, headers=self.headers).json()
-        
+        json.dump(search_name_data, open('data.json', 'w'), indent=4)
+
         if_find = False
         for hit in search_name_data['result']['hits']['hit']:
             info = hit['info']
@@ -31,7 +32,7 @@ class DBLP:
             # 如果没有找到完全匹配的作者，返回第一个作者的信息
             info = search_name_data['result']['hits']['hit'][0]['info']
 
-            author_url = info['url'].replace('html', 'xml')
+            author_url = info['url']+'.xml'
             author_response = requests.get(author_url, headers=self.headers)
             soup = BeautifulSoup(author_response.text, 'xml')
             entries = soup.find_all('r')  # 每一篇论文
@@ -60,7 +61,7 @@ class DBLP:
 if __name__ == '__main__':
     dblp = DBLP()
     # dblp.test_print()
-    entries, flag = dblp.get_name('Ya-Qin Zhang')
+    entries, flag = dblp.get_name('Ya-qin Yang')
     for entry in entries:
         title = entry.find('title')
         authors = entry.find_all('author')
@@ -71,3 +72,4 @@ if __name__ == '__main__':
         print(f"作者: {[a.text for a in authors]}")
         print(f"年份: {year.text if year else 'N/A'}")
         print(f"链接: {[ee.text for ee in ee_tags]}")
+        print('-' * 40)

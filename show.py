@@ -4,8 +4,13 @@ class show_data:
     def __init__(self) -> None:
         pass
 
-    def show_dblp(self, entries):
-        st.title("📚 DBLP 作者论文列表")
+    def show_dblp(self, entries, name, if_find=False):
+        if if_find:
+            st.markdown('### 找到完全匹配的作者')
+        else:
+            st.markdown('### 未能找到完全匹配的作者')
+
+        st.title(f"📚 {name} 的论文列表")
 
         st.write(f"共找到 {len(entries)} 篇论文：")
 
@@ -29,4 +34,17 @@ class show_data:
 
                 st.markdown("---")
 
+class input_table:
+    def __init__(self):
+        pass
+
+    def show_table(self):
+        info = {}
+
+        with st.form(key='table'):
+            info['name'] = st.text_input(label='name')
+
+            submit_button = st.form_submit_button(label='submit')
+
+        return info, submit_button
 
