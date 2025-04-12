@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import streamlit as st
 
 class DBLP:
     def __init__(self):
@@ -40,13 +41,14 @@ class DBLP:
         else:
             # 如果没有找到任何作者，返回空列表
             return [], if_find
+    
 
     def get_candidate_authors(self, name: str):
         name_list = name.split(' ')
         name_request = '+'.join(name_list)
         search_url = self.base_url + 'search/author/api'
         search_name_data = requests.get(search_url, params={'q': name_request, 'format': 'json'}, headers=self.headers).json()
-        
+
         candidates = []
         for hit in search_name_data['result']['hits']['hit']:
             info = hit['info']

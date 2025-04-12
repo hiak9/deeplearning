@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 # 输入作者名
 table = show.input_table()
-info, submit_button = table.show_table()
+info, submit_button, sort_order = table.show_table()
 
 if submit_button:
     dblp = get.DBLP()
@@ -40,7 +40,4 @@ if "selected_author" in st.session_state:
         entries = soup.find_all('r')
 
         show_ui = show.show_data()
-        show_ui.show_dblp(entries, selected, if_find=True)
-
-
-
+        show_ui.show_dblp(entries, selected, if_find=True, sort_order=sort_order)
