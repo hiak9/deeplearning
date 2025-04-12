@@ -1,25 +1,46 @@
 import get
 import show
 import streamlit as st
+import requests
+from bs4 import BeautifulSoup
 
-
+# 输入作者名
 table = show.input_table()
 info, submit_button = table.show_table()
 
 if submit_button:
     dblp = get.DBLP()
-    entries, if_find = dblp.get_name(info['name'])
-    # for entry in entries:
-    #     title = entry.find('title')
-    #     authors = entry.find_all('author')
-    #     year = entry.find('year')
-    #     ee_tags = entry.find_all('ee')
+    candidates = dblp.get_candidate_authors(info['name'])
 
-    #     st.text(f"标题: {title.text if title else 'N/A'}")
-    #     st.text(f"作者: {[a.text for a in authors]}")
-    #     st.text(f"年份: {year.text if year else 'N/A'}")
-    #     st.text(f"链接: {[ee.text for ee in ee_tags]}")
-    #     st.text('-' * 40)
+    if not candidates:
+        st.warning("未找到任何匹配的作者")
+    else:
+        author_names = [c['author'] for c in candidates]
 
-    show = show.show_data()
-    show.show_dblp(entries, info['name'], if_find=if_find)
+        # 让用户选择作者，并记住选择
+        st.selectbox(
+            "请选择最匹配的作者",
+            author_names,
+            key="selected_author",  # 使用 session_state 记录值
+        )
+
+# 判断用户是否已经选择了作者（selectbox 会记录在 session_state 中）
+if "selected_author" in st.session_state:
+    selected = st.session_state["selected_author"]
+
+    # 根据作者名找到对应的 URL
+    dblp = get.DBLP()
+    candidates = dblp.get_candidate_authors(selected)
+    selected_url = [c['url'] for c in candidates if c['author'] == selected]
+    
+    if selected_url:
+        author_url = selected_url[0] + ".xml"
+        author_response = requests.get(author_url, headers=dblp.headers)
+        soup = BeautifulSoup(author_response.text, 'xml')
+        entries = soup.find_all('r')
+
+        show_ui = show.show_data()
+        show_ui.show_dblp(entries, selected, if_find=True)
+
+
+

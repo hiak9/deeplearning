@@ -1,0 +1,124 @@
+{
+    "result": {
+        "query": "Ya* Qin* Zhang*",
+        "status": {
+            "@code": "200",
+            "text": "OK"
+        },
+        "time": {
+            "@unit": "msecs",
+            "text": "5.24"
+        },
+        "completions": {
+            "@total": "1",
+            "@computed": "1",
+            "@sent": "1",
+            "c": {
+                "@sc": "1",
+                "@dc": "7",
+                "@oc": "16",
+                "@id": "21194739",
+                "text": "zhang"
+            }
+        },
+        "hits": {
+            "@total": "7",
+            "@computed": "7",
+            "@sent": "7",
+            "@first": "0",
+            "hit": [
+                {
+                    "@score": "5",
+                    "@id": "3689898",
+                    "info": {
+                        "author": "Yan-Qing Zhang 0001",
+                        "aliases": {
+                            "alias": "Yanqing Zhang 0001"
+                        },
+                        "notes": {
+                            "note": [
+                                {
+                                    "@type": "affiliation",
+                                    "text": "Georgia State University, Atlanta, GA, USA"
+                                },
+                                {
+                                    "@type": "affiliation",
+                                    "text": "Georgia Southwestern State University, Americus, GA, USA"
+                                },
+                                {
+                                    "@type": "affiliation",
+                                    "text": "University of South Florida, Tampa, FL, USA"
+                                }
+                            ]
+                        },
+                        "url": "https://dblp.org/pid/z/YanqingZhang"
+                    },
+                    "url": "URL#3689898"
+                },
+                {
+                    "@score": "5",
+                    "@id": "3690218",
+                    "info": {
+                        "author": "Yanqing Zhang 0004",
+                        "aliases": {
+                            "alias": "Yan-Qing Zhang 0004"
+                        },
+                        "notes": {
+                            "note": {
+                                "@type": "affiliation",
+                                "text": "Yunnan University, Department of Statistics, Kunming, China"
+                            }
+                        },
+                        "url": "https://dblp.org/pid/342/9534-4"
+                    },
+                    "url": "URL#3690218"
+                },
+                {
+                    "@score": "4",
+                    "@id": "3682072",
+                    "info": {
+                        "author": "Qin-Yan Zhang",
+                        "url": "https://dblp.org/pid/243/6931"
+                    },
+                    "url": "URL#3682072"
+                },
+                {
+                    "@score": "4",
+                    "@id": "3689646",
+                    "info": {
+                        "author": "Ya-Qin Zhang",
+                        "url": "https://dblp.org/pid/09/2187"
+                    },
+                    "url": "URL#3689646"
+                },
+                {
+                    "@score": "4",
+                    "@id": "3689647",
+                    "info": {
+                        "author": "Ya-qin Zhang",
+                        "url": "https://dblp.org/pid/136/7647"
+                    },
+                    "url": "URL#3689647"
+                },
+                {
+                    "@score": "4",
+                    "@id": "3689896",
+                    "info": {
+                        "author": "Yan-Qin Zhang",
+                        "url": "https://dblp.org/pid/310/6292"
+                    },
+                    "url": "URL#3689896"
+                },
+                {
+                    "@score": "4",
+                    "@id": "3689897",
+                    "info": {
+                        "author": "Yan-qin Zhang",
+                        "url": "https://dblp.org/pid/63/10187"
+                    },
+                    "url": "URL#3689897"
+                }
+            ]
+        }
+    }
+}

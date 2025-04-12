@@ -41,6 +41,21 @@ class DBLP:
             # 如果没有找到任何作者，返回空列表
             return [], if_find
 
+    def get_candidate_authors(self, name: str):
+        name_list = name.split(' ')
+        name_request = '+'.join(name_list)
+        search_url = self.base_url + 'search/author/api'
+        search_name_data = requests.get(search_url, params={'q': name_request, 'format': 'json'}, headers=self.headers).json()
+        
+        candidates = []
+        for hit in search_name_data['result']['hits']['hit']:
+            info = hit['info']
+            candidates.append({
+                'author': info['author'],
+                'url': info['url']
+            })
+        return candidates
+
     def test_print(self):
         url = 'https://dblp.org/pid/09/2187.xml'  # 换成目标作者的pid地址
         resp = requests.get(url)

@@ -5,11 +5,6 @@ class show_data:
         pass
 
     def show_dblp(self, entries, name, if_find=False):
-        if if_find:
-            st.markdown('### 找到完全匹配的作者')
-        else:
-            st.markdown('### 未能找到完全匹配的作者')
-
         st.title(f"📚 {name} 的论文列表")
 
         st.write(f"共找到 {len(entries)} 篇论文：")
