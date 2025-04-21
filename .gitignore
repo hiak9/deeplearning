@@ -175,3 +175,4 @@ cython_debug/
 
 # some test files
 test.*
+*.word

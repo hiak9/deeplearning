@@ -7,22 +7,23 @@ from bs4 import BeautifulSoup
 # 输入作者名
 table = show.input_table()
 info, submit_button, sort_order = table.show_table()
-
+if 'candidates' not in st.session_state:
+    st.session_state['candidates'] = []
 if submit_button:
     dblp = get.DBLP()
     candidates = dblp.get_candidate_authors(info['name'])
+    st.session_state['candidates'] = candidates
 
-    if not candidates:
-        st.warning("未找到任何匹配的作者")
-    else:
-        author_names = [c['author'] for c in candidates]
-
-        # 让用户选择作者，并记住选择
-        st.selectbox(
-            "请选择最匹配的作者",
-            author_names,
-            key="selected_author",  # 使用 session_state 记录值
-        )
+if not st.session_state['candidates']:
+    st.warning("未找到任何匹配的作者")
+else:
+    author_names = [c['author'] for c in st.session_state['candidates']]
+    # 让用户选择作者，并记住选择
+    st.selectbox(
+        "请选择最匹配的作者",
+        author_names,
+        key="selected_author",  # 使用 session_state 记录值
+    )
 
 # 判断用户是否已经选择了作者（selectbox 会记录在 session_state 中）
 if "selected_author" in st.session_state:
